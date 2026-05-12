@@ -4,9 +4,10 @@ import { socials } from "@/lib/content";
 import styles from "./contact.module.css";
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title: "Contact — Brief me",
   description:
     "Brief Rishima Menon on what you're launching. One short form. Replies within 48 hours.",
+  alternates: { canonical: "/contact/" },
 };
 
 export default function ContactPage() {
@@ -16,22 +17,22 @@ export default function ContactPage() {
         <div className={styles.intro}>
           <span className="eyebrow">Get in touch</span>
           <h1 className={styles.headline}>
-            Brief me on what you're <span className="italic-display">launching.</span>
+            Brief me on what you&rsquo;re <span className="italic-display">launching.</span>
           </h1>
           <p className={styles.sub}>
             One short form. I read every enquiry myself and reply within 48
-            hours — usually sooner. Prefer email? That works too.
+            hours &mdash; usually sooner. Prefer email? That works too.
           </p>
 
           <div className={styles.elsewhere}>
-            <span className="eyebrow">Or reach me</span>
+            <h2 className="eyebrow">Or reach me</h2>
             {socials.map((s) => (
               <a
                 key={s.handle}
                 href={s.url}
                 className={styles.social}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
               >
                 <span>{s.label}</span>
                 <span>{s.handle} →</span>

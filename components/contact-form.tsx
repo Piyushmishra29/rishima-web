@@ -1,33 +1,36 @@
 "use client";
 
 import { useState } from "react";
+import { SITE_NAME, WEB3FORMS_KEY } from "@/lib/site";
+import {
+  enquiryServiceOptions as services,
+  enquiryBudgetOptions as budgets,
+  socials,
+} from "@/lib/content";
 import styles from "./contact-form.module.css";
 
-const services = [
-  "Social media management",
-  "Content strategy",
-  "Creative content production",
-  "Paid ads (Meta / Google)",
-  "Brand consulting / 1-1",
-  "Creator collab / UGC",
-  "Something else",
-];
+type Status = "idle" | "sending" | "ok" | "error" | "misconfigured";
 
-const budgets = ["< ₹50k / mo", "₹50k – ₹1.5L / mo", "₹1.5L – ₹3L / mo", "₹3L+ / mo", "One-off project"];
-
-type Status = "idle" | "sending" | "ok" | "error";
+const emailSocial = socials.find((s) => s.label === "Email");
+const fallbackEmail = emailSocial?.handle ?? "hello@rishimamenon.com";
 
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    if (!WEB3FORMS_KEY) {
+      setStatus("misconfigured");
+      return;
+    }
+
     setStatus("sending");
     const form = e.currentTarget;
     const data = new FormData(form);
-    data.append("access_key", "WEB3FORMS_KEY_PLACEHOLDER");
+    data.append("access_key", WEB3FORMS_KEY);
     data.append("subject", `New enquiry from ${data.get("name") || "someone"}`);
-    data.append("from_name", "rishimamenon.com");
+    data.append("from_name", SITE_NAME);
 
     try {
       const res = await fetch("https://api.web3forms.com/submit", {
@@ -47,18 +50,18 @@ export function ContactForm() {
 
   if (status === "ok") {
     return (
-      <div className={styles.success}>
+      <div className={styles.success} aria-live="polite">
         <h3 className={styles.successTitle}>Got it.</h3>
         <p>
-          Your brief is with me. I'll read it carefully and reply within 48 hours
-          — usually sooner. Talk soon.
+          Your brief is with me. I&rsquo;ll read it carefully and reply within 48
+          hours &mdash; usually sooner. Talk soon.
         </p>
       </div>
     );
   }
 
   return (
-    <form className={styles.form} onSubmit={onSubmit}>
+    <form className={styles.form} onSubmit={onSubmit} aria-describedby="form-status">
       <div className={styles.row}>
         <label className={styles.field}>
           <span>Your name</span>
@@ -76,8 +79,8 @@ export function ContactForm() {
           <input name="brand" type="text" autoComplete="organization" />
         </label>
         <label className={styles.field}>
-          <span>Where you're based</span>
-          <input name="location" type="text" placeholder="City, country" />
+          <span>Where you&rsquo;re based</span>
+          <input name="location" type="text" autoComplete="address-level2" />
         </label>
       </div>
 
@@ -115,23 +118,44 @@ export function ContactForm() {
           name="message"
           rows={6}
           required
-          placeholder="Tell me about the brand, the timeline, and what success looks like."
+          aria-describedby="brief-hint"
         />
+        <span id="brief-hint" style={{ fontSize: 13, color: "var(--fg-soft)" }}>
+          Tell me about the brand, the timeline, and what success looks like.
+        </span>
       </label>
 
-      <input type="hidden" name="botcheck" />
+      <input
+        type="text"
+        name="botcheck"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className={styles.botcheck}
+      />
 
-      <button type="submit" className="btn" disabled={status === "sending"}>
+      <button
+        type="submit"
+        className={`btn ${styles.submit}`}
+        disabled={status === "sending"}
+      >
         {status === "sending" ? "Sending…" : "Send"} →
       </button>
 
-      {status === "error" && (
-        <p className={styles.error}>
-          Something broke. Email{" "}
-          <a href="mailto:hello@rishimamenon.com">hello@rishimamenon.com</a>{" "}
-          instead?
-        </p>
-      )}
+      <div id="form-status" aria-live="polite">
+        {status === "error" && (
+          <p className={styles.error}>
+            Something broke. Email{" "}
+            <a href={`mailto:${fallbackEmail}`}>{fallbackEmail}</a> instead?
+          </p>
+        )}
+        {status === "misconfigured" && (
+          <p className={styles.error}>
+            Form not wired up yet. Until then, email{" "}
+            <a href={`mailto:${fallbackEmail}`}>{fallbackEmail}</a>.
+          </p>
+        )}
+      </div>
     </form>
   );
 }

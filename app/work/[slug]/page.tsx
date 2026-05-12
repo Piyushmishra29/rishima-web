@@ -19,7 +19,8 @@ export async function generateMetadata({
   if (!project) return { title: "Not found" };
   return {
     title: `${project.title} · ${project.brand}`,
-    description: project.outcome,
+    description: `${project.brand} — ${project.outcome}`,
+    alternates: { canonical: `/work/${slug}/` },
   };
 }
 
@@ -34,6 +35,7 @@ export default async function CaseStudyPage({
 
   const idx = projects.findIndex((p) => p.slug === slug);
   const next = projects[(idx + 1) % projects.length];
+  const prev = projects[(idx - 1 + projects.length) % projects.length];
 
   return (
     <>
@@ -53,29 +55,43 @@ export default async function CaseStudyPage({
       </section>
 
       {project.cover && (
-        <section className={styles.coverWrap}>
+        <div className={styles.coverWrap}>
           <div className="wrap">
-            <img src={project.cover} alt={project.title} className={styles.cover} />
+            <img
+              src={project.cover}
+              alt=""
+              className={styles.cover}
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
+              style={
+                project.coverPosition
+                  ? { objectPosition: project.coverPosition }
+                  : undefined
+              }
+            />
           </div>
-        </section>
+        </div>
       )}
 
       <section className={styles.body}>
         <div className={`wrap ${styles.bodyGrid}`}>
           {project.brief && (
             <div className={styles.block}>
-              <span className="eyebrow">The brief</span>
+              <h2 className="eyebrow">The brief</h2>
               <p>{project.brief}</p>
             </div>
           )}
 
           {project.approach && (
             <div className={styles.block}>
-              <span className="eyebrow">Approach</span>
+              <h2 className="eyebrow">Approach</h2>
               <ol className={styles.steps}>
                 {project.approach.map((step, i) => (
                   <li key={i}>
-                    <span className={styles.stepNum}>{String(i + 1).padStart(2, "0")}</span>
+                    <span className={styles.stepNum} aria-hidden="true">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
                     <span>{step}</span>
                   </li>
                 ))}
@@ -85,7 +101,7 @@ export default async function CaseStudyPage({
 
           {project.results && (
             <div className={styles.block}>
-              <span className="eyebrow">What happened</span>
+              <h2 className="eyebrow">What happened</h2>
               <div className={styles.results}>
                 {project.results.map((r) => (
                   <div key={r.label} className={styles.result}>
@@ -100,22 +116,36 @@ export default async function CaseStudyPage({
           {project.gallery && project.gallery.length > 0 && (
             <div className={styles.gallery}>
               {project.gallery.map((src, i) => (
-                <img key={i} src={src} alt="" loading="lazy" />
+                <img
+                  key={i}
+                  src={src}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
               ))}
             </div>
           )}
         </div>
       </section>
 
-      <section className={styles.nextWrap}>
+      <nav className={styles.nextWrap} aria-label="Case navigation">
         <div className={`wrap ${styles.nextInner}`}>
-          <Link href={`/work/${next.slug}/`} className={styles.nextLink}>
-            <span className="eyebrow">Next case</span>
+          <Link href={`/work/${prev.slug}/`} className={styles.navCase}>
+            <span className="eyebrow">← Previous</span>
+            <h3>{prev.title}</h3>
+            <span className={styles.navBrand}>{prev.brand} · {prev.tag}</span>
+          </Link>
+          <Link
+            href={`/work/${next.slug}/`}
+            className={`${styles.navCase} ${styles.navCaseRight}`}
+          >
+            <span className="eyebrow">Next →</span>
             <h3>{next.title}</h3>
-            <span className={styles.nextBrand}>{next.brand} ·  {next.tag} →</span>
+            <span className={styles.navBrand}>{next.brand} · {next.tag}</span>
           </Link>
         </div>
-      </section>
+      </nav>
 
       <div className="wrap">
         <CtaBand />

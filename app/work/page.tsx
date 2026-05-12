@@ -5,9 +5,10 @@ import { projects } from "@/lib/content";
 import styles from "./work.module.css";
 
 export const metadata: Metadata = {
-  title: "Work",
+  title: "Work — Selected reels, campaigns & editorial",
   description:
     "Selected work — creator collabs, marketing case studies, editorial photography, DVCs.",
+  alternates: { canonical: "/work/" },
 };
 
 export default function WorkPage() {
@@ -21,13 +22,13 @@ export default function WorkPage() {
           </h1>
           <p className={styles.sub}>
             A working portfolio. Some of these are mine. Some are for clients.
-            All of them taught me something — usually that the brief was
+            All of them taught me something &mdash; usually that the brief was
             different from what was written down.
           </p>
         </div>
       </section>
 
-      <section className={styles.grid}>
+      <section className={styles.grid} aria-label="Project list">
         <div className={`wrap ${styles.gridInner}`}>
           {projects.map((p) => (
             <ProjectCard key={p.slug} project={p} size="md" />

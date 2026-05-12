@@ -22,6 +22,7 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--fg-soft);
+  font-weight: 500;
 }
 
 .field input,
@@ -49,6 +50,7 @@
 .field textarea:focus {
   outline: none;
   border-color: var(--fg);
+  box-shadow: 0 1px 0 0 var(--fg);
 }
 
 .field select {
@@ -60,8 +62,17 @@
   padding-right: 24px;
 }
 
-:global(input[name="botcheck"]) {
-  display: none;
+.botcheck {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.submit {
+  align-self: flex-start;
+  margin-top: 4px;
 }
 
 .success {
@@ -79,7 +90,15 @@
 
 .error {
   font-size: 14px;
-  color: var(--lavender);
+  color: var(--fg);
+  background: var(--peach);
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  align-self: flex-start;
+}
+
+.error a {
+  text-decoration: underline;
 }
 
 @media (max-width: 640px) {

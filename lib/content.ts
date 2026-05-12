@@ -14,6 +14,8 @@ export type Project = {
   tag: "Creator" | "Marketing" | "Photography" | "DVC" | "Editorial";
   outcome: string;
   cover?: string;
+  /** CSS object-position value for the cover. Default: 'center top'. */
+  coverPosition?: string;
   tint: string;
   year: number;
   role: string;
@@ -35,6 +37,30 @@ export const palette = {
   sage: "#c2d2af",
   lavender: "#a48faa",
   muted: "#e5dcc8",
+};
+
+/** Single source of truth for Rishima's bio + booking status. */
+export const BIO = {
+  name: "Rishima Menon",
+  age: 24,
+  basedIn: "Bengaluru",
+  trajectory: "London → India",
+  dvcCount: 3,
+  bookingStatus: "Now booking · Q3",
+
+  /** Hero / nav tagline. */
+  tagline: "Content people actually want to watch.",
+
+  /** Short summary for home about-teaser + meta description. */
+  summary:
+    "I'm Rishima Menon, 24. International Business & Marketing grad who accidentally turned being chronically online into a career. Started in London, freelancing across India — the brief never changes: content people actually want to watch.",
+
+  /** Full bio for /about. Three paragraphs. */
+  paragraphs: [
+    "I'm Rishima Menon, 24 — an International Business & Marketing grad who accidentally turned being chronically online into a career.",
+    "I started at a marketing agency in London, moved to India, and now freelance with brands across F&B, skincare, fashion, lifestyle, and real estate. My client roster runs across markets, but the brief never changes: content people actually want to watch.",
+    "When I'm not building other people's brands, I'm building my own page around fashion, skincare, and lifestyle. Having acted in a few DVCs, I'm equally at home behind the camera and in front of it.",
+  ],
 };
 
 export const services: Service[] = [
@@ -94,8 +120,10 @@ export const projects: Project[] = [
     brand: "F&B Brand",
     title: "Launch reels that didn't need a CTA",
     tag: "Creator",
-    outcome: "Six reels, 3.1M views, 4.2% follow-rate. Conversion measured the only way it should be — at the till.",
+    outcome:
+      "Six reels, 3.1M views, 4.2% follow-rate. Conversion measured the only way it should be — at the till.",
     cover: "/media/photos/editorial-1.jpg",
+    coverPosition: "center 25%",
     tint: "var(--peach)",
     year: 2025,
     role: "Concept · Script · Talent · Edit",
@@ -119,8 +147,10 @@ export const projects: Project[] = [
     brand: "Skincare Label",
     title: "UGC that didn't smell like UGC",
     tag: "Creator",
-    outcome: "12-asset bank, used across paid and organic. Cost-per-click dropped 38% in two weeks.",
+    outcome:
+      "12-asset bank, used across paid and organic. Cost-per-click dropped 38% in two weeks.",
     cover: "/media/photos/lifestyle-2.jpg",
+    coverPosition: "center top",
     tint: "var(--sage)",
     year: 2025,
     role: "Talent · Script · Edit",
@@ -143,8 +173,10 @@ export const projects: Project[] = [
     brand: "Real-estate developer",
     title: "Selling a building like a magazine",
     tag: "Marketing",
-    outcome: "Full launch comms, social, paid, lookbook. 220 leads in week one. The sales team had a sit-down.",
+    outcome:
+      "Full launch comms, social, paid, lookbook. 220 leads in week one. The sales team had a sit-down.",
     cover: "/media/photos/lifestyle-1.jpg",
+    coverPosition: "center top",
     tint: "var(--blue)",
     year: 2025,
     role: "Strategy · Content · Paid",
@@ -167,8 +199,10 @@ export const projects: Project[] = [
     brand: "Fashion · Editorial",
     title: "Black saree, brick wall, no notes",
     tag: "Editorial",
-    outcome: "Personal shoot, picked up by the label. Sometimes the best brief is the one you wrote for yourself.",
+    outcome:
+      "Personal shoot, picked up by the label. Sometimes the best brief is the one you wrote for yourself.",
     cover: "/media/photos/editorial-2.jpg",
+    coverPosition: "center 15%",
     tint: "var(--lavender)",
     year: 2024,
     role: "Concept · Talent",
@@ -190,8 +224,10 @@ export const projects: Project[] = [
     brand: "DVC · Acting",
     title: "On camera",
     tag: "DVC",
-    outcome: "Lead in three direct-video commercials across F&B and lifestyle. Equally at home in front of a lens.",
+    outcome:
+      "Lead in three direct-video commercials across F&B and lifestyle. The script and the delivery, same person.",
     cover: "/media/photos/lifestyle-3.jpg",
+    coverPosition: "center top",
     tint: "var(--peach)",
     year: 2024,
     role: "On-screen talent",
@@ -212,8 +248,10 @@ export const projects: Project[] = [
     brand: "Personal brand",
     title: "Fashion, skincare, lifestyle — mine",
     tag: "Creator",
-    outcome: "Built my own page around what I actually wear, use, and care about. Slower than chasing trends. Better.",
+    outcome:
+      "Built my own page around what I actually wear, use, and care about. Slower than chasing trends. Better.",
     cover: "/media/photos/portrait-about.jpg",
+    coverPosition: "center 20%",
     tint: "var(--sage)",
     year: 2025,
     role: "Everything",
@@ -226,7 +264,7 @@ export const projects: Project[] = [
     ],
     results: [
       { label: "Pillars", value: "3" },
-      { label: "Brands DM'd", value: "more than I reply to" },
+      { label: "Inbound DMs", value: "more than I reply to" },
     ],
     gallery: ["/media/photos/portrait-about.jpg", "/media/photos/portrait-hero.jpg"],
   },
@@ -244,6 +282,21 @@ export const credentials = [
   "International Business & Marketing grad",
   "Started at a marketing agency in London",
   "Now freelancing across India and beyond",
-  "Acted in 3 DVCs",
-  "Built and grown brands in 5 sectors",
+  `Acted in ${BIO.dvcCount} DVCs`,
+  `Built and grown brands in ${sectors.length} sectors`,
+];
+
+/** Enquiry-form options. Sourced from services + a few extras. */
+export const enquiryServiceOptions = [
+  ...services.map((s) => s.title),
+  "Creator collab / UGC",
+  "Something else",
+];
+
+export const enquiryBudgetOptions = [
+  "< ₹50k / mo",
+  "₹50k – ₹1.5L / mo",
+  "₹1.5L – ₹3L / mo",
+  "₹3L+ / mo",
+  "One-off project",
 ];

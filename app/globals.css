@@ -2,7 +2,7 @@
   --bg: #f4ecdf;
   --bg-deep: #ebe1cf;
   --fg: #1f1c18;
-  --fg-soft: #4a4339;
+  --fg-soft: #2e2924;
   --muted: #e5dcc8;
   --hairline: rgba(31, 28, 24, 0.12);
 
@@ -21,8 +21,23 @@
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+figure,
+blockquote {
   margin: 0;
   padding: 0;
 }
@@ -47,7 +62,7 @@ body {
   line-height: 1.55;
   min-height: 100dvh;
   overflow-x: clip;
-  /* paper grain overlay */
+  /* paper grain overlay anchored on body::before */
   position: relative;
 }
 
@@ -94,7 +109,7 @@ a {
   transition: opacity 0.2s var(--ease);
 }
 
-a:hover {
+a:not([class]):hover {
   opacity: 0.7;
 }
 
@@ -115,7 +130,33 @@ button {
 
 ::selection {
   background: var(--lavender);
+  color: var(--fg);
+}
+
+:focus-visible {
+  outline: 2px solid var(--fg);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.skipLink {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  padding: 10px 16px;
+  background: var(--fg);
   color: var(--bg);
+  border-radius: 999px;
+  font-size: 14px;
+  z-index: 100;
+  transform: translateY(-200%);
+  transition: transform 0.2s var(--ease);
+}
+
+.skipLink:focus,
+.skipLink:focus-visible {
+  transform: translateY(0);
+  opacity: 1;
 }
 
 .wrap {
@@ -134,6 +175,17 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 10px;
+  font-weight: 500;
+}
+
+/* Make eyebrow class type-agnostic — it can sit on a span OR an h2 */
+h1.eyebrow,
+h2.eyebrow,
+h3.eyebrow {
+  font-family: var(--font-body), sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  line-height: 1.4;
 }
 
 .eyebrow::before {
@@ -159,9 +211,9 @@ button {
 }
 
 .btn:hover {
-  opacity: 1;
   transform: translateY(-2px);
   background: var(--lavender);
+  color: var(--fg);
 }
 
 .btn--ghost {
@@ -184,4 +236,15 @@ button {
 .italic-display {
   font-style: italic;
   font-variation-settings: "SOFT" 100, "WONK" 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
