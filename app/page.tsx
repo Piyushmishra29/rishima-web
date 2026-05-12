@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Hero } from "@/components/hero";
+import { PortfolioHero } from "@/components/portfolio-hero";
+import { TabNav } from "@/components/tab-nav";
 import { ProjectCard } from "@/components/project-card";
 import { ServiceCard } from "@/components/service-card";
-import { CtaBand } from "@/components/cta-band";
+import { GetInTouch } from "@/components/get-in-touch";
 import { projects, services, sectors, BIO } from "@/lib/content";
 import styles from "./page.module.css";
 
@@ -19,14 +20,13 @@ export const metadata: Metadata = {
 };
 
 const featured = projects.slice(0, 4);
-
-/** Repeat sectors twice for seamless marquee loop. */
 const marqueeItems = [...sectors, ...sectors];
 
 export default function HomePage() {
   return (
     <>
-      <Hero />
+      <PortfolioHero />
+      <TabNav />
 
       <section className={styles.section}>
         <div className={`wrap ${styles.head}`}>
@@ -45,6 +45,7 @@ export default function HomePage() {
       </section>
 
       <section
+        id="work"
         className={`${styles.section} reveal`}
         aria-labelledby="home-work"
       >
@@ -67,6 +68,7 @@ export default function HomePage() {
       </section>
 
       <section
+        id="services"
         className={`${styles.section} reveal`}
         aria-labelledby="home-services"
       >
@@ -117,7 +119,7 @@ export default function HomePage() {
       </section>
 
       <div className="wrap reveal">
-        <CtaBand />
+        <GetInTouch />
       </div>
     </>
   );

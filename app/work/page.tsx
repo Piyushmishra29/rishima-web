@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ProjectCard } from "@/components/project-card";
-import { CtaBand } from "@/components/cta-band";
+import { GetInTouch } from "@/components/get-in-touch";
 import { projects } from "@/lib/content";
 import styles from "./work.module.css";
 
@@ -44,7 +44,7 @@ export default function WorkPage() {
       </section>
 
       <div className="wrap reveal">
-        <CtaBand />
+        <GetInTouch />
       </div>
     </>
   );

@@ -278,6 +278,29 @@ export const socials: Social[] = [
 
 export const sectors = ["F&B", "Skincare", "Fashion", "Lifestyle", "Real estate"];
 
+export type Tool = {
+  name: string;
+  /** simpleicons.org slug — used to construct the icon URL */
+  slug: string;
+  category: "Marketing" | "Design" | "Content" | "Analytics";
+};
+
+/** Tools & platforms Rishima works in. Mirrors Maryna's "Skills & Certifications" strip. */
+export const tools: Tool[] = [
+  { name: "Meta Business Suite", slug: "meta", category: "Marketing" },
+  { name: "Google Ads", slug: "googleads", category: "Marketing" },
+  { name: "Google Analytics", slug: "googleanalytics", category: "Analytics" },
+  { name: "LinkedIn", slug: "linkedin", category: "Marketing" },
+  { name: "Canva", slug: "canva", category: "Design" },
+  { name: "Figma", slug: "figma", category: "Design" },
+  { name: "Adobe Photoshop", slug: "adobephotoshop", category: "Design" },
+  { name: "Adobe Lightroom", slug: "adobelightroom", category: "Design" },
+  { name: "CapCut", slug: "capcut", category: "Content" },
+  { name: "Adobe Premiere", slug: "adobepremierepro", category: "Content" },
+  { name: "Notion", slug: "notion", category: "Content" },
+  { name: "Instagram", slug: "instagram", category: "Content" },
+];
+
 export const credentials = [
   "International Business & Marketing grad",
   "Started at a marketing agency in London",

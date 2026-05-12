@@ -1,0 +1,68 @@
+.wrap {
+  display: flex;
+  justify-content: center;
+  padding: 18px 0;
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.row {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 18px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tabWrap {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 18px;
+}
+
+.tab {
+  font-size: 13px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--fg);
+  font-weight: 500;
+  position: relative;
+  transition: color 0.2s var(--ease);
+}
+
+.tab::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 1px;
+  background: var(--fg);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s var(--ease);
+}
+
+.tab:hover::after {
+  transform: scaleX(1);
+}
+
+.dot {
+  font-style: italic;
+  font-family: var(--font-display);
+  color: var(--lavender);
+  font-size: 18px;
+}
+
+@media (max-width: 600px) {
+  .row {
+    gap: 10px;
+  }
+  .tabWrap {
+    gap: 10px;
+  }
+  .tab {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+  }
+}

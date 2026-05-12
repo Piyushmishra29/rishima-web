@@ -1,34 +1,20 @@
 .footer {
-  margin-top: 120px;
-  padding: 96px 0 40px;
-  background: var(--bg-deep);
+  margin-top: 0;
+  padding: 56px 0 32px;
+  background: var(--bg);
   border-top: 1px solid var(--hairline);
 }
 
 .inner {
   display: flex;
   flex-direction: column;
-  gap: 72px;
-}
-
-.lead {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 40px;
-  flex-wrap: wrap;
-}
-
-.headline {
-  max-width: 18ch;
+  gap: 32px;
 }
 
 .cols {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 40px;
-  border-top: 1px solid var(--hairline);
-  padding-top: 56px;
 }
 
 .col {

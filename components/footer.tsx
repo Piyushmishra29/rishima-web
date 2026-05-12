@@ -7,16 +7,6 @@ export function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={`wrap ${styles.inner}`}>
-        <div className={styles.lead}>
-          <h2 className={styles.headline}>
-            Got a brand that needs{" "}
-            <span className="italic-display">noticing?</span>
-          </h2>
-          <Link href="/contact/" className="btn">
-            Work with me →
-          </Link>
-        </div>
-
         <div className={styles.cols}>
           <div className={styles.col}>
             <h3 className="eyebrow">Sitemap</h3>

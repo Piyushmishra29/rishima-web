@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ServiceCard } from "@/components/service-card";
-import { CtaBand } from "@/components/cta-band";
+import { GetInTouch } from "@/components/get-in-touch";
+import { SkillsStrip } from "@/components/skills-strip";
 import { services, sectors, credentials, BIO } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
 import styles from "./about.module.css";
@@ -81,6 +82,8 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <SkillsStrip />
+
       <section
         className={`${styles.servicesSection} reveal`}
         aria-labelledby="about-services"
@@ -99,7 +102,7 @@ export default function AboutPage() {
       </section>
 
       <div className="wrap reveal">
-        <CtaBand />
+        <GetInTouch />
       </div>
     </>
   );

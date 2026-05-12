@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { projects } from "@/lib/content";
-import { CtaBand } from "@/components/cta-band";
+import { GetInTouch } from "@/components/get-in-touch";
 import { BreadcrumbJsonLd } from "@/components/json-ld";
 import { CountUp } from "@/components/count-up";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
@@ -179,8 +179,8 @@ export default async function CaseStudyPage({
         </div>
       </nav>
 
-      <div className="wrap">
-        <CtaBand />
+      <div className="wrap reveal">
+        <GetInTouch />
       </div>
     </>
   );
