@@ -2,12 +2,22 @@ import type { Metadata } from "next";
 import { ServiceCard } from "@/components/service-card";
 import { CtaBand } from "@/components/cta-band";
 import { services, sectors, credentials, BIO } from "@/lib/content";
+import { SITE_URL } from "@/lib/site";
 import styles from "./about.module.css";
 
 export const metadata: Metadata = {
-  title: "About",
-  description: `${BIO.name} — ${BIO.age}, International Business & Marketing grad. ${BIO.trajectory}. Freelance marketer and creator across ${sectors.join(", ").toLowerCase()}.`,
+  title: "About — The marketer behind brands you've seen",
+  description:
+    "Rishima Menon, 24 — International Business & Marketing grad turned freelance marketer + creator. Started in London, now freelancing across India for brands in F&B, skincare, fashion, lifestyle, real estate.",
   alternates: { canonical: "/about/" },
+  openGraph: {
+    title: "About Rishima Menon",
+    description:
+      "Marketer by training. Creator by accident. Behind the brands you've seen — and the camera, when they need it.",
+    url: "/about/",
+    type: "profile",
+    images: [`${SITE_URL}/media/photos/portrait-about.jpg`],
+  },
 };
 
 export default function AboutPage() {

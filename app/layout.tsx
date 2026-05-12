@@ -5,19 +5,35 @@ import "./globals.css";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
 import { PersonJsonLd } from "@/components/json-ld";
-import { SITE_NAME, SITE_URL, SITE_DESCRIPTION } from "@/lib/site";
+import {
+  SITE_NAME,
+  SITE_URL,
+  SITE_DESCRIPTION,
+  SITE_KEYWORDS,
+} from "@/lib/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} — Marketer & Creator`,
+    default: `${SITE_NAME} — Freelance Marketer & Creator, Bengaluru`,
     template: `%s · ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  keywords: SITE_KEYWORDS,
+  category: "Marketing & Content",
   alternates: { canonical: "/" },
+  formatDetection: {
+    email: false,
+    telephone: false,
+    address: false,
+  },
   openGraph: {
-    title: `${SITE_NAME} — Marketer & Creator`,
-    description: "Content people actually want to watch.",
+    title: `${SITE_NAME} — Freelance Marketer & Creator`,
+    description: SITE_DESCRIPTION,
     type: "website",
     locale: "en_IN",
     siteName: SITE_NAME,
@@ -26,7 +42,20 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: SITE_NAME,
-    description: "Marketer & Creator. Content people actually want to watch.",
+    description:
+      "Hire Rishima Menon. Reels people actually watch. Campaigns that move the needle. Reply in 48h.",
+    creator: "@rishimamenon",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
 };
 

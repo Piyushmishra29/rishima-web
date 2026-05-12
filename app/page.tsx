@@ -9,6 +9,13 @@ import styles from "./page.module.css";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
+  openGraph: {
+    title: "Rishima Menon — Freelance Marketer & Creator, Bengaluru",
+    description:
+      "Hire Rishima Menon — reels people actually watch, UGC that performs, campaigns that move the needle. F&B, skincare, fashion, lifestyle, real estate. Reply in 48h.",
+    url: "/",
+    type: "profile",
+  },
 };
 
 const featured = projects.slice(0, 4);

@@ -4,10 +4,17 @@ import { socials } from "@/lib/content";
 import styles from "./contact.module.css";
 
 export const metadata: Metadata = {
-  title: "Contact — Brief me",
+  title: "Hire Rishima — Brief me on what you're launching",
   description:
-    "Brief Rishima Menon on what you're launching. One short form. Replies within 48 hours.",
+    "Hire Rishima Menon. One short form. I read every enquiry myself and reply within 48 hours — usually sooner. Available worldwide from Bengaluru. Now booking.",
   alternates: { canonical: "/contact/" },
+  openGraph: {
+    title: "Hire Rishima Menon",
+    description:
+      "Brief me on what you're launching. One short form. Replies within 48 hours — usually sooner.",
+    url: "/contact/",
+    type: "website",
+  },
 };
 
 export default function ContactPage() {
@@ -15,7 +22,7 @@ export default function ContactPage() {
     <section className={styles.page}>
       <div className={`wrap ${styles.grid}`}>
         <div className={styles.intro}>
-          <span className="eyebrow">Get in touch</span>
+          <span className="eyebrow">Get in touch · Now booking</span>
           <h1 className={styles.headline}>
             Brief me on what you&rsquo;re <span className="italic-display">launching.</span>
           </h1>

@@ -5,10 +5,17 @@ import { projects } from "@/lib/content";
 import styles from "./work.module.css";
 
 export const metadata: Metadata = {
-  title: "Work — Selected reels, campaigns & editorial",
+  title: "Work — Reels, Campaigns, UGC & DVCs",
   description:
-    "Selected work — creator collabs, marketing case studies, editorial photography, DVCs.",
+    "Selected work by Rishima Menon — reels that drove 3M+ views, UGC that cut CPC 38%, campaigns that sold buildings. F&B, skincare, fashion, lifestyle, real estate.",
   alternates: { canonical: "/work/" },
+  openGraph: {
+    title: "Work — Rishima Menon",
+    description:
+      "Selected work — reels, campaigns, UGC, editorial photography, DVCs.",
+    url: "/work/",
+    type: "website",
+  },
 };
 
 export default function WorkPage() {

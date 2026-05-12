@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { projects } from "@/lib/content";
 import { CtaBand } from "@/components/cta-band";
+import { BreadcrumbJsonLd } from "@/components/json-ld";
+import { SITE_URL, SITE_NAME } from "@/lib/site";
 import styles from "./case.module.css";
 
 export function generateStaticParams() {
@@ -17,10 +19,29 @@ export async function generateMetadata({
   const { slug } = await params;
   const project = projects.find((p) => p.slug === slug);
   if (!project) return { title: "Not found" };
+
+  const description = `${project.brand} — ${project.outcome}`;
+  const ogImage = project.cover
+    ? `${SITE_URL}${project.cover}`
+    : `${SITE_URL}/opengraph-image`;
+
   return {
     title: `${project.title} · ${project.brand}`,
-    description: `${project.brand} — ${project.outcome}`,
+    description,
     alternates: { canonical: `/work/${slug}/` },
+    openGraph: {
+      title: `${project.title} — ${project.brand}`,
+      description,
+      url: `/work/${slug}/`,
+      type: "article",
+      images: [ogImage],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.title} — ${project.brand}`,
+      description,
+      images: [ogImage],
+    },
   };
 }
 
@@ -39,6 +60,14 @@ export default async function CaseStudyPage({
 
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", url: `${SITE_URL}/` },
+          { name: "Work", url: `${SITE_URL}/work/` },
+          { name: project.title, url: `${SITE_URL}/work/${slug}/` },
+        ]}
+      />
+
       <section className={styles.hero} style={{ background: project.tint }}>
         <div className={`wrap ${styles.heroInner}`}>
           <div className={styles.meta}>
