@@ -2,11 +2,15 @@
 /**
  * Mirrors the static export in `out/` to Hostinger via FTP.
  *
- * Set FTP_HOST, FTP_USER, FTP_PASS in env (or .env.local which is gitignored).
- * The Hostinger root is already inside public_html — no chdir needed.
+ * Reads from .env.local (gitignored). Required vars:
+ *   FTP_HOST, FTP_USER, FTP_PASS
+ *
+ * Optional:
+ *   FTP_LOCAL   (default: "out")
+ *   FTP_REMOTE  (default: "/")
  *
  * Usage:
- *   FTP_HOST=... FTP_USER=... FTP_PASS=... node deploy.mjs
+ *   pnpm deploy
  */
 
 import { Client } from "basic-ftp";
@@ -21,6 +25,7 @@ const HOST = process.env.FTP_HOST;
 const USER = process.env.FTP_USER;
 const PASS = process.env.FTP_PASS;
 const LOCAL = process.env.FTP_LOCAL || "out";
+const REMOTE = process.env.FTP_REMOTE || "/";
 
 if (!HOST || !USER || !PASS) {
   console.error("Missing FTP_HOST / FTP_USER / FTP_PASS in env. See README.md.");
@@ -39,7 +44,13 @@ client.ftp.verbose = false;
 try {
   console.log(`→ Connecting to ${HOST}…`);
   await client.access({ host: HOST, user: USER, password: PASS, secure: false });
-  console.log(`→ Mirroring ${localDir} → /`);
+
+  if (REMOTE !== "/" && REMOTE !== "") {
+    console.log(`→ ensureDir ${REMOTE}`);
+    await client.ensureDir(REMOTE);
+  }
+
+  console.log(`→ Mirroring ${localDir} → ${REMOTE}`);
   await client.uploadFromDir(localDir);
   console.log("✓ Done.");
 } catch (err) {
