@@ -21,6 +21,10 @@
   opacity: 0.85;
 }
 
+.band :global(.italic-display) {
+  color: var(--fg);
+}
+
 .inner {
   display: flex;
   flex-direction: column;

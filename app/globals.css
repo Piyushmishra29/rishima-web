@@ -236,6 +236,7 @@ h3.eyebrow {
 .italic-display {
   font-style: italic;
   font-variation-settings: "SOFT" 100, "WONK" 1;
+  color: var(--lavender);
 }
 
 @media (prefers-reduced-motion: reduce) {
