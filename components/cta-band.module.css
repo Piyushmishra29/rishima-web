@@ -1,0 +1,42 @@
+.band {
+  margin-top: 100px;
+  padding: clamp(64px, 8vw, 120px) 0;
+  background: var(--lavender);
+  color: var(--bg);
+  border-radius: var(--radius-lg);
+}
+
+.band :global(.btn) {
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.band :global(.btn:hover) {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.band :global(.eyebrow) {
+  color: var(--bg);
+  opacity: 0.85;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: flex-start;
+}
+
+.headline {
+  font-size: clamp(40px, 6vw, 88px);
+  color: var(--bg);
+  max-width: 14ch;
+}
+
+.sub {
+  font-size: 17px;
+  opacity: 0.9;
+  max-width: 48ch;
+  margin-bottom: 8px;
+}

@@ -8,6 +8,12 @@ importers:
 
   .:
     dependencies:
+      basic-ftp:
+        specifier: ^6.0.1
+        version: 6.0.1
+      dotenv:
+        specifier: ^17.4.2
+        version: 17.4.2
       next:
         specifier: 16.2.6
         version: 16.2.6(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -263,6 +269,10 @@ packages:
     engines: {node: '>=6.0.0'}
     hasBin: true
 
+  basic-ftp@6.0.1:
+    resolution: {integrity: sha512-3ilxa3n4276wGQp/ImRAuz4ALdsj/2Wd3FqoZBZlajDYnByCZ0JMb4+26Rde0wGXIbM0G2HWSfr/Fi8b21KX8g==}
+    engines: {node: '>=10.0.0'}
+
   caniuse-lite@1.0.30001792:
     resolution: {integrity: sha512-hVLMUZFgR4JJ6ACt1uEESvQN1/dBVqPAKY0hgrV70eN3391K6juAfTjKZLKvOMsx8PxA7gsY1/tLMMTcfFLLpw==}
 
@@ -275,6 +285,10 @@ packages:
   detect-libc@2.1.2:
     resolution: {integrity: sha512-Btj2BOOO83o3WyH59e8MgXsxEQVcarkUOpEYrubB0urwnN10yQ364rsiByU11nZlqWYZm05i/of7io4mzihBtQ==}
     engines: {node: '>=8'}
+
+  dotenv@17.4.2:
+    resolution: {integrity: sha512-nI4U3TottKAcAD9LLud4Cb7b2QztQMUEfHbvhTH09bqXTxnSie8WnjPALV/WMCrJZ6UV/qHJ6L03OqO3LcdYZw==}
+    engines: {node: '>=12'}
 
   nanoid@3.3.12:
     resolution: {integrity: sha512-ZB9RH/39qpq5Vu6Y+NmUaFhQR6pp+M2Xt76XBnEwDaGcVAqhlvxrl3B2bKS5D3NH3QR76v3aSrKaF/Kiy7lEtQ==}
@@ -506,6 +520,8 @@ snapshots:
 
   baseline-browser-mapping@2.10.29: {}
 
+  basic-ftp@6.0.1: {}
+
   caniuse-lite@1.0.30001792: {}
 
   client-only@0.0.1: {}
@@ -514,6 +530,8 @@ snapshots:
 
   detect-libc@2.1.2:
     optional: true
+
+  dotenv@17.4.2: {}
 
   nanoid@3.3.12: {}
 

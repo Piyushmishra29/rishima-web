@@ -1,0 +1,89 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  max-width: 640px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field > span {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-soft);
+}
+
+.field input,
+.field select,
+.field textarea {
+  font: inherit;
+  font-size: 16px;
+  color: var(--fg);
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--hairline);
+  padding: 8px 0;
+  border-radius: 0;
+  appearance: none;
+  transition: border-color 0.2s var(--ease);
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--fg);
+}
+
+.field select {
+  background-image: linear-gradient(45deg, transparent 50%, var(--fg) 50%),
+    linear-gradient(135deg, var(--fg) 50%, transparent 50%);
+  background-position: right 4px center, right 0 center;
+  background-size: 6px 6px;
+  background-repeat: no-repeat;
+  padding-right: 24px;
+}
+
+:global(input[name="botcheck"]) {
+  display: none;
+}
+
+.success {
+  padding: 40px;
+  border-radius: var(--radius-md);
+  background: var(--sage);
+  max-width: 640px;
+}
+
+.successTitle {
+  font-family: var(--font-display);
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+
+.error {
+  font-size: 14px;
+  color: var(--lavender);
+}
+
+@media (max-width: 640px) {
+  .row {
+    grid-template-columns: 1fr;
+  }
+}
