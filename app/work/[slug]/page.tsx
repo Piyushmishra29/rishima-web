@@ -4,6 +4,7 @@ import Link from "next/link";
 import { projects } from "@/lib/content";
 import { CtaBand } from "@/components/cta-band";
 import { BreadcrumbJsonLd } from "@/components/json-ld";
+import { CountUp } from "@/components/count-up";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
 import styles from "./case.module.css";
 
@@ -106,16 +107,16 @@ export default async function CaseStudyPage({
       <section className={styles.body}>
         <div className={`wrap ${styles.bodyGrid}`}>
           {project.brief && (
-            <div className={styles.block}>
+            <div className={`${styles.block} reveal`}>
               <h2 className="eyebrow">The brief</h2>
               <p>{project.brief}</p>
             </div>
           )}
 
           {project.approach && (
-            <div className={styles.block}>
+            <div className={`${styles.block} reveal`}>
               <h2 className="eyebrow">Approach</h2>
-              <ol className={styles.steps}>
+              <ol className={`${styles.steps} reveal-stagger`}>
                 {project.approach.map((step, i) => (
                   <li key={i}>
                     <span className={styles.stepNum} aria-hidden="true">
@@ -129,12 +130,14 @@ export default async function CaseStudyPage({
           )}
 
           {project.results && (
-            <div className={styles.block}>
+            <div className={`${styles.block} reveal`}>
               <h2 className="eyebrow">What happened</h2>
-              <div className={styles.results}>
+              <div className={`${styles.results} reveal-stagger`}>
                 {project.results.map((r) => (
                   <div key={r.label} className={styles.result}>
-                    <span className={styles.resultVal}>{r.value}</span>
+                    <span className={styles.resultVal}>
+                      <CountUp value={r.value} />
+                    </span>
                     <span className={styles.resultLabel}>{r.label}</span>
                   </div>
                 ))}
@@ -143,7 +146,7 @@ export default async function CaseStudyPage({
           )}
 
           {project.gallery && project.gallery.length > 0 && (
-            <div className={styles.gallery}>
+            <div className={`${styles.gallery} reveal-stagger`}>
               {project.gallery.map((src, i) => (
                 <img
                   key={i}

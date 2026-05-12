@@ -1,6 +1,43 @@
 import Link from "next/link";
+import { Fragment } from "react";
 import { BIO } from "@/lib/content";
 import styles from "./hero.module.css";
+
+const HEADLINE_LINE_1: { text: string; italic?: boolean }[] = [
+  { text: "Content" },
+  { text: "people" },
+  { text: "actually", italic: true },
+];
+
+const HEADLINE_LINE_2: { text: string }[] = [
+  { text: "want" },
+  { text: "to" },
+  { text: "watch." },
+];
+
+function Words({
+  list,
+  startIndex,
+}: {
+  list: { text: string; italic?: boolean }[];
+  startIndex: number;
+}) {
+  return (
+    <>
+      {list.map((w, i) => (
+        <Fragment key={w.text}>
+          <span
+            className={`hero-word${w.italic ? " italic-display" : ""}`}
+            style={{ ["--word-i" as string]: startIndex + i } as React.CSSProperties}
+          >
+            {w.text}
+          </span>
+          {i < list.length - 1 ? " " : null}
+        </Fragment>
+      ))}
+    </>
+  );
+}
 
 export function Hero() {
   return (
@@ -11,8 +48,9 @@ export function Hero() {
             Marketer · Creator · {BIO.trajectory}
           </span>
           <h1 className={styles.headline}>
-            Content people <span className="italic-display">actually</span>
-            <br /> want to watch.
+            <Words list={HEADLINE_LINE_1} startIndex={0} />
+            <br />
+            <Words list={HEADLINE_LINE_2} startIndex={HEADLINE_LINE_1.length} />
           </h1>
           <p className={styles.sub}>
             I&rsquo;m {BIO.name} &mdash; freelance marketer and creator. I
@@ -22,7 +60,7 @@ export function Hero() {
           </p>
           <div className={styles.actions}>
             <Link href="/contact/" className="btn">
-              Work with me →
+              Work with me <span>→</span>
             </Link>
             <Link href="/work/" className={styles.linky}>
               See selected work →

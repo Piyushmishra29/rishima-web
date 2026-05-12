@@ -20,6 +20,9 @@ export const metadata: Metadata = {
 
 const featured = projects.slice(0, 4);
 
+/** Repeat sectors twice for seamless marquee loop. */
+const marqueeItems = [...sectors, ...sectors];
+
 export default function HomePage() {
   return (
     <>
@@ -28,20 +31,23 @@ export default function HomePage() {
       <section className={styles.section}>
         <div className={`wrap ${styles.head}`}>
           <span className="eyebrow">Sectors I work across</span>
-          <h2 className={styles.marquee}>
-            {sectors.map((s, i) => (
-              <span key={s} className={styles.sector}>
+        </div>
+        <div className={`marquee-wrap ${styles.marquee}`} aria-hidden="false">
+          <div className="marquee-track">
+            {marqueeItems.map((s, i) => (
+              <span key={i} className={styles.sector}>
                 {s}
-                {i < sectors.length - 1 && (
-                  <span className={styles.dot} aria-hidden="true">·</span>
-                )}
+                <span className={styles.dot} aria-hidden="true">·</span>
               </span>
             ))}
-          </h2>
+          </div>
         </div>
       </section>
 
-      <section className={styles.section} aria-labelledby="home-work">
+      <section
+        className={`${styles.section} reveal`}
+        aria-labelledby="home-work"
+      >
         <div className={`wrap ${styles.head}`}>
           <span className="eyebrow">Selected work</span>
           <div className={styles.headRow}>
@@ -53,14 +59,17 @@ export default function HomePage() {
             </Link>
           </div>
         </div>
-        <div className={`wrap ${styles.grid}`}>
+        <div className={`wrap ${styles.grid} reveal-stagger`}>
           {featured.map((p, i) => (
             <ProjectCard key={p.slug} project={p} size={i === 0 ? "lg" : "md"} />
           ))}
         </div>
       </section>
 
-      <section className={styles.section} aria-labelledby="home-services">
+      <section
+        className={`${styles.section} reveal`}
+        aria-labelledby="home-services"
+      >
         <div className={`wrap ${styles.head}`}>
           <span className="eyebrow">What I do</span>
           <h2 id="home-services">
@@ -72,14 +81,17 @@ export default function HomePage() {
             calendar is the only thing that changes.
           </p>
         </div>
-        <div className={`wrap ${styles.servicesGrid}`}>
+        <div className={`wrap ${styles.servicesGrid} reveal-stagger`}>
           {services.map((s) => (
             <ServiceCard key={s.number} service={s} />
           ))}
         </div>
       </section>
 
-      <section className={styles.section} aria-labelledby="home-about">
+      <section
+        className={`${styles.section} reveal`}
+        aria-labelledby="home-about"
+      >
         <div className={`wrap ${styles.aboutTeaser}`}>
           <div className={styles.aboutCopy}>
             <span className="eyebrow">About</span>
@@ -90,7 +102,7 @@ export default function HomePage() {
             </h2>
             <p>{BIO.summary}</p>
             <Link href="/about/" className="btn btn--ghost">
-              Read more →
+              Read more <span>→</span>
             </Link>
           </div>
           <div className={styles.aboutImg}>
@@ -104,7 +116,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <div className="wrap">
+      <div className="wrap reveal">
         <CtaBand />
       </div>
     </>

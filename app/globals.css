@@ -207,13 +207,29 @@ h3.eyebrow {
   color: var(--bg);
   font-size: 15px;
   letter-spacing: 0.01em;
-  transition: transform 0.25s var(--ease), background 0.25s var(--ease);
+  transition: transform 0.35s var(--ease), background 0.25s var(--ease),
+    color 0.25s var(--ease), box-shadow 0.35s var(--ease);
+  position: relative;
+  overflow: hidden;
 }
 
 .btn:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px) rotate(-1deg);
   background: var(--lavender);
   color: var(--fg);
+  box-shadow: 0 12px 32px -16px rgba(31, 28, 24, 0.45);
+}
+
+.btn:active {
+  transform: translateY(-1px) rotate(0deg);
+}
+
+.btn > :last-child:not(:only-child) {
+  transition: transform 0.3s var(--ease);
+}
+
+.btn:hover > :last-child:not(:only-child) {
+  transform: translateX(4px);
 }
 
 .btn--ghost {
@@ -237,6 +253,127 @@ h3.eyebrow {
   font-style: italic;
   font-variation-settings: "SOFT" 100, "WONK" 1;
   color: var(--lavender);
+}
+
+/* ============================================================
+   Animations
+   ============================================================ */
+
+/* Scroll-driven reveal — pure CSS via animation-timeline: view().
+   Modern browsers (Chrome 115+, Safari 18+, FF 132+) only.
+   Older browsers see static content (graceful degradation). */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: revealFadeUp linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 28%;
+    }
+    .reveal-stagger > * {
+      animation: revealFadeUp linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 38%;
+    }
+  }
+}
+
+@keyframes revealFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(36px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hero word-by-word reveal on first paint */
+.hero-word {
+  display: inline-block;
+  will-change: opacity, transform;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-word {
+    opacity: 0;
+    transform: translateY(0.5em);
+    animation: heroWord 800ms var(--ease) both;
+    animation-delay: calc(var(--word-i, 0) * 90ms + 180ms);
+  }
+}
+
+@keyframes heroWord {
+  from {
+    opacity: 0;
+    transform: translateY(0.5em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Paper grain drift — barely perceptible, gives the cream life */
+@media (prefers-reduced-motion: no-preference) {
+  body::before {
+    animation: grainDrift 14s steps(6) infinite alternate;
+  }
+}
+
+@keyframes grainDrift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-32px, -32px, 0);
+  }
+}
+
+/* Marquee ticker — duplicated track scrolls translateX(-50%) */
+.marquee-wrap {
+  overflow: hidden;
+  width: 100%;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 6%,
+    black 94%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 6%,
+    black 94%,
+    transparent
+  );
+}
+
+.marquee-track {
+  display: inline-flex;
+  gap: 56px;
+  white-space: nowrap;
+  align-items: baseline;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .marquee-track {
+    animation: marqueeScroll 38s linear infinite;
+  }
+}
+
+.marquee-wrap:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marqueeScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -36,14 +36,14 @@ export default function WorkPage() {
       </section>
 
       <section className={styles.grid} aria-label="Project list">
-        <div className={`wrap ${styles.gridInner}`}>
+        <div className={`wrap ${styles.gridInner} reveal-stagger`}>
           {projects.map((p) => (
             <ProjectCard key={p.slug} project={p} size="md" />
           ))}
         </div>
       </section>
 
-      <div className="wrap">
+      <div className="wrap reveal">
         <CtaBand />
       </div>
     </>

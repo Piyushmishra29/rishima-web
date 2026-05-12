@@ -7,6 +7,20 @@
   min-height: 320px;
   position: relative;
   overflow: hidden;
+  transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 48px -24px rgba(31, 28, 24, 0.35);
+}
+
+.num {
+  transition: transform 0.4s var(--ease);
+}
+
+.card:hover .num {
+  transform: rotate(-8deg) scale(1.1);
 }
 
 .head {
@@ -20,13 +34,14 @@
   font-weight: 500;
 }
 
-.num {
+.head .num {
   font-family: var(--font-display);
   font-style: italic;
   font-size: 22px;
   letter-spacing: 0;
   text-transform: none;
   font-weight: 400;
+  color: var(--fg);
 }
 
 .title {

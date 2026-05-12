@@ -3,12 +3,11 @@
   flex-direction: column;
   gap: 18px;
   border-radius: var(--radius-md);
-  transition: transform 0.4s var(--ease);
+  transition: transform 0.5s var(--ease);
 }
 
 .card:hover {
-  opacity: 1;
-  transform: translateY(-4px);
+  transform: translateY(-8px);
 }
 
 .media {
@@ -17,6 +16,24 @@
   border-radius: var(--radius-md);
   overflow: hidden;
   background: var(--muted);
+}
+
+.media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 60%,
+    rgba(31, 28, 24, 0.2) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.4s var(--ease);
+  pointer-events: none;
+}
+
+.card:hover .media::after {
+  opacity: 1;
 }
 
 .lg .media {
@@ -31,11 +48,20 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s var(--ease);
+  transition: transform 0.7s var(--ease), filter 0.5s var(--ease);
 }
 
 .card:hover .img {
-  transform: scale(1.04);
+  transform: scale(1.08);
+  filter: saturate(1.08);
+}
+
+.title {
+  transition: color 0.3s var(--ease);
+}
+
+.card:hover .title {
+  color: var(--fg);
 }
 
 .placeholder {

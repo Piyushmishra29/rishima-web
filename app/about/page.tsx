@@ -51,7 +51,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className={styles.factGrid} aria-label="At a glance">
+      <section className={`${styles.factGrid} reveal`} aria-label="At a glance">
         <div className={`wrap ${styles.factsInner}`}>
           <div className={styles.col}>
             <h2 className="eyebrow">Sectors</h2>
@@ -81,21 +81,24 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className={styles.servicesSection} aria-labelledby="about-services">
+      <section
+        className={`${styles.servicesSection} reveal`}
+        aria-labelledby="about-services"
+      >
         <div className={`wrap ${styles.head}`}>
           <span className="eyebrow">What I do</span>
           <h2 id="about-services">
             Six things <span className="italic-display">I&rsquo;m good at.</span>
           </h2>
         </div>
-        <div className={`wrap ${styles.servicesGrid}`}>
+        <div className={`wrap ${styles.servicesGrid} reveal-stagger`}>
           {services.map((s) => (
             <ServiceCard key={s.number} service={s} />
           ))}
         </div>
       </section>
 
-      <div className="wrap">
+      <div className="wrap reveal">
         <CtaBand />
       </div>
     </>
